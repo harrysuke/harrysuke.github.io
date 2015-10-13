@@ -1,0 +1,8 @@
+excerpt_separator: ""
+pygments: true
+markdown: kramdown
+url: http://harrysuke.github.io
+title: Kairi Juri
+tagline: A log of everyday life
+description: My awesome new site
+paginate: 5
