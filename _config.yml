@@ -4,5 +4,6 @@ markdown: kramdown
 url: http://harrysuke.github.io
 title: Kairi Juri
 tagline: A log of everyday life
-description: My awesome new site
+description: My Github.io 
+theme: just-the-docs
 paginate: 5
