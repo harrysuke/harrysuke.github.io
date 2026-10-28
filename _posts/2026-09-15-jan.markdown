@@ -1,0 +1,45 @@
+---
+published: true
+title: "jan"
+layout: post
+date: 2026-09-15 01:25:49 +0000
+categories: general
+---
+
+## Overview
+
+**[jan](https://github.com/harrysuke/jan)**
+
+Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.
+
+
+> **Note:** This is a forked repository. I've been exploring and studying the codebase to understand the architecture and patterns used.
+
+## Technical Details
+
+| Property | Value |
+|----------|-------|
+| **Language** | None |
+| **License** | Other |
+| **Type** | Fork |
+| **Created** | September 15, 2026 |
+
+## Analysis
+
+The **jan** repository is a forked project written primarily in **None**. Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.
+
+As a forked project, this repository serves as a learning resource and reference for understanding how experienced developers structure their codebases, handle edge cases, and implement best practices.
+
+### Key Takeaways
+
+- **Technology Stack:** The project leverages None, showcasing the use of modern development tools and frameworks
+- **Architecture:** The codebase provides insights into how production-grade applications are structured and organized.
+- **Learning Value:** Studying this fork helps understand real-world code structure, dependency management, and testing strategies.
+
+## Repository Link
+
+You can explore the full source code here: [jan](https://github.com/harrysuke/jan)
+
+---
+
+*This post is part of a series documenting all of my GitHub repositories. Each post covers the technical aspects and purpose of the project.*

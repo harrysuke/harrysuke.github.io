@@ -1,0 +1,43 @@
+---
+published: true
+title: "Bonafoid"
+layout: post
+date: 2026-10-23 07:06:46 +0000
+categories: rust
+---
+
+## Overview
+
+**[Bonafoid](https://github.com/harrysuke/Bonafoid)**
+
+Bonafoid is an open-source, workflow platform. It automatically translates visual models and business workflows into web, desktop (via Tauri), and mobile (via PWA).
+
+
+## Technical Details
+
+| Property | Value |
+|----------|-------|
+| **Language** | Rust |
+| **License** | GNU Affero General Public License v3.0 |
+| **Type** | Original |
+| **Created** | October 23, 2026 |
+
+## Analysis
+
+The **Bonafoid** repository is a original project written primarily in **Rust**. Bonafoid is an open-source, workflow platform. It automatically translates visual models and business workflows into web, desktop (via Tauri), and mobile (via PWA).
+
+This project demonstrates practical software development skills, covering architecture design, implementation patterns, and deployment considerations.
+
+### Key Takeaways
+
+- **Technology Stack:** The project leverages Rust, showcasing hands-on experience with the language's ecosystem
+- **Architecture:** The implementation follows established patterns appropriate for the problem domain.
+- **Learning Value:** Building this project from scratch provided valuable experience in problem-solving and system design.
+
+## Repository Link
+
+You can explore the full source code here: [Bonafoid](https://github.com/harrysuke/Bonafoid)
+
+---
+
+*This post is part of a series documenting all of my GitHub repositories. Each post covers the technical aspects and purpose of the project.*
