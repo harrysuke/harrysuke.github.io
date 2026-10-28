@@ -34,11 +34,11 @@
   <div class="nav-inner">
     <a href="#" class="nav-brand">Kairi Juri</a>
     <ul class="nav-links">
-      <li><a href="#about" class="nav-link-text">About</a></li>
-      <li><a href="#skills" class="nav-link-text">Skills</a></li>
-      <li><a href="#work" class="nav-link-text">Work</a></li>
-      <li><a href="#blog" class="nav-link-text">Blog</a></li>
-      <li><a href="#contact" class="nav-link-text">Contact</a></li>
+      <li><a href="#about" class="nav-link-text" data-i18n="nav_about">About</a></li>
+      <li><a href="#skills" class="nav-link-text" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#work" class="nav-link-text" data-i18n="nav_work">Work</a></li>
+      <li><a href="#blog" class="nav-link-text" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="#contact" class="nav-link-text" data-i18n="nav_contact">Contact</a></li>
       <li>
         <button class="nav-search-btn" onclick="openSearch()" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -46,6 +46,31 @@
             <path d="m21 21-4.35-4.35"/>
           </svg>
         </button>
+      </li>
+      <li class="nav-translate-wrap">
+        <button class="nav-search-btn nav-translate-btn" onclick="toggleTranslateMenu()" aria-label="Translate">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 8 6 6"/>
+            <path d="m4 14 6-6 2-3"/>
+            <path d="M2 5h12"/>
+            <path d="M7 2h1"/>
+            <path d="m22 22-5-10-5 10"/>
+            <path d="M14 18h6"/>
+          </svg>
+          <span class="nav-translate-label" id="currentLang">EN</span>
+        </button>
+        <div class="translate-dropdown" id="translateDropdown">
+          <button class="translate-option active" onclick="setLanguage('en')" data-lang="en">
+            <span class="translate-flag">&#127468;&#127463;</span>
+            <span class="translate-name">English</span>
+            <span class="translate-code">EN</span>
+          </button>
+          <button class="translate-option" onclick="setLanguage('ms')" data-lang="ms">
+            <span class="translate-flag">&#127474;&#127481;</span>
+            <span class="translate-name">Bahasa Melayu</span>
+            <span class="translate-code">MS</span>
+          </button>
+        </div>
       </li>
       <li>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -62,42 +87,42 @@
   <!-- Hero -->
   <section class="hero">
     <h1 class="hero-name">Kairi Juri</h1>
-    <p class="hero-tagline">Full-stack developer crafting workflows, web apps, and systems across Rust, Kotlin, C#, and beyond.</p>
-    <p class="hero-desc">I build things that work&mdash;from low-code workflow platforms to full-stack CRUD apps across a dozen languages and frameworks. 169 public repositories on GitHub and counting. Currently exploring Rust + Tauri for cross-platform desktop and mobile.</p>
+    <p class="hero-tagline" data-i18n="hero_tagline">Full-stack developer crafting workflows, web apps, and systems across Rust, Kotlin, C#, and beyond.</p>
+    <p class="hero-desc" data-i18n="hero_desc">I build things that work&mdash;from low-code workflow platforms to full-stack CRUD apps across a dozen languages and frameworks. 169 public repositories on GitHub and counting. Currently exploring Rust + Tauri for cross-platform desktop and mobile.</p>
   </section>
 
   <!-- About -->
   <section id="about">
-    <div class="section-label">About</div>
-    <h2 class="section-title">Who I Am</h2>
+    <div class="section-label" data-i18n="about_label">About</div>
+    <h2 class="section-title" data-i18n="about_title">Who I Am</h2>
     <div class="about-grid">
       <div class="about-card">
-        <h3>Background</h3>
-        <p>Software developer with experience spanning backend systems, web applications, mobile apps, and desktop tools. I enjoy learning new stacks and have built projects in Rust, Kotlin, C#, Java, C++, PHP, Python, Dart, JavaScript, and more.</p>
+        <h3 data-i18n="about_background_title">Background</h3>
+        <p data-i18n="about_background_desc">Software developer with experience spanning backend systems, web applications, mobile apps, and desktop tools. I enjoy learning new stacks and have built projects in Rust, Kotlin, C#, Java, C++, PHP, Python, Dart, JavaScript, and more.</p>
       </div>
       <div class="about-card">
-        <h3>Focus Areas</h3>
-        <p>Full-stack web development, cross-platform desktop/mobile apps (Tauri, Flutter, Electron), workflow automation &amp; low-code platforms, and RESTful API design with clean architecture.</p>
+        <h3 data-i18n="about_focus_title">Focus Areas</h3>
+        <p data-i18n="about_focus_desc">Full-stack web development, cross-platform desktop/mobile apps (Tauri, Flutter, Electron), workflow automation &amp; low-code platforms, and RESTful API design with clean architecture.</p>
       </div>
       <div class="about-card">
-        <h3>Currently</h3>
-        <p>Building <a href="https://github.com/harrysuke/Bonafoid">Bonafoid</a>&mdash;an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.</p>
+        <h3 data-i18n="about_currently_title">Currently</h3>
+        <p data-i18n="about_currently_desc">Building <a href="https://github.com/harrysuke/Bonafoid">Bonafoid</a>&mdash;an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.</p>
       </div>
       <div class="about-card">
-        <h3>Open to Work</h3>
-        <p>Actively seeking opportunities. Available for full-stack development roles, freelance projects, and collaboration on open-source. 169 repos, 21 followers on GitHub.</p>
+        <h3 data-i18n="about_opentoWork_title">Open to Work</h3>
+        <p data-i18n="about_opentoWork_desc">Actively seeking opportunities. Available for full-stack development roles, freelance projects, and collaboration on open-source. 169 repos, 21 followers on GitHub.</p>
       </div>
     </div>
   </section>
 
   <!-- Skills -->
   <section id="skills">
-    <div class="section-label">Skills Inventory</div>
-    <h2 class="section-title">Technologies from My GitHub Repos</h2>
-    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Derived from 169 public repositories. Tags weighted by repository count.</p>
+    <div class="section-label" data-i18n="skills_label">Skills Inventory</div>
+    <h2 class="section-title" data-i18n="skills_title">Technologies from My GitHub Repos</h2>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;" data-i18n="skills_desc">Derived from 169 public repositories. Tags weighted by repository count.</p>
 
     <div class="skills-group">
-      <div class="skills-group-title">Backend Languages</div>
+      <div class="skills-group-title" data-i18n="skills_backend">Backend Languages</div>
       <div class="skill-tags">
         <span class="skill-tag">Kotlin <span class="skill-count">6</span></span>
         <span class="skill-tag">Java <span class="skill-count">6</span></span>
@@ -111,7 +136,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">Frontend</div>
+      <div class="skills-group-title" data-i18n="skills_frontend">Frontend</div>
       <div class="skill-tags">
         <span class="skill-tag">JavaScript <span class="skill-count">2</span></span>
         <span class="skill-tag">TypeScript <span class="skill-count">1</span></span>
@@ -125,7 +150,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">Frameworks &amp; Libraries</div>
+      <div class="skills-group-title" data-i18n="skills_frameworks">Frameworks &amp; Libraries</div>
       <div class="skill-tags">
         <span class="skill-tag">Spring Boot / Spring MVC <span class="skill-count">4</span></span>
         <span class="skill-tag">ASP.NET Core MVC <span class="skill-count">2</span></span>
@@ -141,7 +166,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">Databases</div>
+      <div class="skills-group-title" data-i18n="skills_databases">Databases</div>
       <div class="skill-tags">
         <span class="skill-tag">SQLite</span>
         <span class="skill-tag">MySQL <span class="skill-count">6</span></span>
@@ -153,7 +178,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">Mobile &amp; Desktop</div>
+      <div class="skills-group-title" data-i18n="skills_mobile">Mobile &amp; Desktop</div>
       <div class="skill-tags">
         <span class="skill-tag">Flutter</span>
         <span class="skill-tag">Android Studio / Java</span>
@@ -164,7 +189,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">DevOps &amp; Tools</div>
+      <div class="skills-group-title" data-i18n="skills_devops">DevOps &amp; Tools</div>
       <div class="skill-tags">
         <span class="skill-tag">Docker</span>
         <span class="skill-tag">CI/CD</span>
@@ -177,7 +202,7 @@
     </div>
 
     <div class="skills-group">
-      <div class="skills-group-title">Architecture &amp; Patterns</div>
+      <div class="skills-group-title" data-i18n="skills_architecture">Architecture &amp; Patterns</div>
       <div class="skill-tags">
         <span class="skill-tag">MVC</span>
         <span class="skill-tag">CRUD Applications</span>
@@ -192,8 +217,8 @@
 
   <!-- Work Samples -->
   <section id="work">
-    <div class="section-label">Selected Work</div>
-    <h2 class="section-title">Case Studies &amp; Projects</h2>
+    <div class="section-label" data-i18n="work_label">Selected Work</div>
+    <h2 class="section-title" data-i18n="work_title">Case Studies &amp; Projects</h2>
     <div class="work-grid">
 
       <div class="work-card">
@@ -201,7 +226,7 @@
           <h3>Bonafoid</h3>
           <span class="work-card-lang">Rust</span>
         </div>
-        <p>Open-source workflow platform that automatically translates visual models and business workflows into web, desktop (via Tauri), and mobile (via PWA) applications.</p>
+        <p data-i18n="work_bonafoid_desc">Open-source workflow platform that automatically translates visual models and business workflows into web, desktop (via Tauri), and mobile (via PWA) applications.</p>
         <div class="work-card-topics">
           <span class="work-topic">rust</span>
           <span class="work-topic">typescript</span>
@@ -209,7 +234,7 @@
           <span class="work-topic">python</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/Bonafoid">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/Bonafoid" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -218,14 +243,14 @@
           <h3>ASP.NET Core MVC + SQLite</h3>
           <span class="work-card-lang">C#</span>
         </div>
-        <p>ASP.NET Core MVC application with SQLite, Docker containerization, and CI/CD pipeline. Demonstrates modern .NET development with Entity Framework Core.</p>
+        <p data-i18n="work_aspnet_desc">ASP.NET Core MVC application with SQLite, Docker containerization, and CI/CD pipeline. Demonstrates modern .NET development with Entity Framework Core.</p>
         <div class="work-card-topics">
           <span class="work-topic">docker</span>
           <span class="work-topic">ci-cd</span>
           <span class="work-topic">entity-framework</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/ASP.NET-Core-MVC-SQLite">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/ASP.NET-Core-MVC-SQLite" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -234,7 +259,7 @@
           <h3>Spring Boot + JTE + SQLite</h3>
           <span class="work-card-lang">Kotlin</span>
         </div>
-        <p>Spring Boot Kotlin application using JTE template engine and SQLite database with vanilla JS Fetch API. Part of a series exploring Spring Boot patterns with different frontend approaches.</p>
+        <p data-i18n="work_springboot_desc">Spring Boot Kotlin application using JTE template engine and SQLite database with vanilla JS Fetch API. Part of a series exploring Spring Boot patterns with different frontend approaches.</p>
         <div class="work-card-topics">
           <span class="work-topic">spring-boot</span>
           <span class="work-topic">jte</span>
@@ -242,7 +267,7 @@
           <span class="work-topic">fetch-api</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/springsqlite">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/springsqlite" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -251,14 +276,14 @@
           <h3>UCUA Mobile App</h3>
           <span class="work-card-lang">Dart</span>
         </div>
-        <p>Mobile application programming project built with Flutter and REST API integration. Cross-platform mobile development with a clean UI and backend communication.</p>
+        <p data-i18n="work_ucua_desc">Mobile application programming project built with Flutter and REST API integration. Cross-platform mobile development with a clean UI and backend communication.</p>
         <div class="work-card-topics">
           <span class="work-topic">flutter</span>
           <span class="work-topic">dart</span>
           <span class="work-topic">rest-api</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/ucua_app">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/ucua_app" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -267,7 +292,7 @@
           <h3>HTMX + Spring Boot</h3>
           <span class="work-card-lang">Kotlin</span>
         </div>
-        <p>Spring Boot 4.1 with Kotlin, JSP, and HTMX for hypermedia-driven applications. Explores the HTMX approach to building dynamic web apps without heavy JavaScript frameworks.</p>
+        <p data-i18n="work_htmx_desc">Spring Boot 4.1 with Kotlin, JSP, and HTMX for hypermedia-driven applications. Explores the HTMX approach to building dynamic web apps without heavy JavaScript frameworks.</p>
         <div class="work-card-topics">
           <span class="work-topic">spring-boot</span>
           <span class="work-topic">htmx</span>
@@ -275,7 +300,7 @@
           <span class="work-topic">mysql</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/htmx_springboot">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/htmx_springboot" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -284,13 +309,13 @@
           <h3>SNS Safety &amp; Security System (C++)</h3>
           <span class="work-card-lang">C++</span>
         </div>
-        <p>Safety and security system written in C++. Part of a broader series exploring the same domain across multiple languages including Java (command line, Spring MVC with REST API).</p>
+        <p data-i18n="work_sns_desc">Safety and security system written in C++. Part of a broader series exploring the same domain across multiple languages including Java (command line, Spring MVC with REST API).</p>
         <div class="work-card-topics">
           <span class="work-topic">cpp</span>
           <span class="work-topic">security</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/snscpp">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/snscpp" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -299,7 +324,7 @@
           <h3>Node.js + MongoDB + Express</h3>
           <span class="work-card-lang">JS</span>
         </div>
-        <p>Node.js application with MongoDB and Express framework using Handlebars templating. Full-stack JavaScript CRUD application.</p>
+        <p data-i18n="work_nodejs_desc">Node.js application with MongoDB and Express framework using Handlebars templating. Full-stack JavaScript CRUD application.</p>
         <div class="work-card-topics">
           <span class="work-topic">node.js</span>
           <span class="work-topic">mongodb</span>
@@ -307,7 +332,7 @@
           <span class="work-topic">handlebars</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/mongonode">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/mongonode" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
@@ -316,21 +341,21 @@
           <h3>Python Flask CRUD</h3>
           <span class="work-card-lang">Python</span>
         </div>
-        <p>Python Flask application with MySQL CRUD operations. Clean and lightweight web application demonstrating Python web development patterns.</p>
+        <p data-i18n="work_flask_desc">Python Flask application with MySQL CRUD operations. Clean and lightweight web application demonstrating Python web development patterns.</p>
         <div class="work-card-topics">
           <span class="work-topic">flask</span>
           <span class="work-topic">python</span>
           <span class="work-topic">mysql</span>
         </div>
         <div class="work-card-meta">
-          <a href="https://github.com/harrysuke/flask">View Repository &rarr;</a>
+          <a href="https://github.com/harrysuke/flask" data-i18n="work_view_repo">View Repository &rarr;</a>
         </div>
       </div>
 
     </div>
 
     <div style="text-align: center; margin-top: 2.5rem;">
-      <a href="https://github.com/harrysuke?tab=repositories" class="btn btn-secondary">
+      <a href="https://github.com/harrysuke?tab=repositories" class="btn btn-secondary" data-i18n="work_view_all">
         View All 169 Repositories &rarr;
       </a>
     </div>
@@ -338,17 +363,17 @@
 
   <!-- Blog -->
   <section id="blog">
-    <div class="section-label">Blog</div>
-    <h2 class="section-title">Latest Posts</h2>
+    <div class="section-label" data-i18n="blog_label">Blog</div>
+    <h2 class="section-title" data-i18n="blog_title">Latest Posts</h2>
     <div class="work-grid" style="grid-template-columns: 1fr;">
       <div class="work-card">
         <div class="work-card-header">
           <h3><a href="javascript:void(0)" onclick="showPost()" style="color: inherit;">Hello World!</a></h3>
           <span class="work-card-lang">13 Oct 2015</span>
         </div>
-        <p>Welcome to My GitHub Pages Blog! Hello, world! This is my very first post on my new GitHub Pages blog. I'm excited to start sharing my journey, projects, and discoveries with you all. Whether it's coding tips, project updates, or lessons learned&hellip;</p>
+        <p data-i18n="blog_hello_desc">Welcome to My GitHub Pages Blog! Hello, world! This is my very first post on my new GitHub Pages blog. I'm excited to start sharing my journey, projects, and discoveries with you all. Whether it's coding tips, project updates, or lessons learned&hellip;</p>
         <div class="work-card-meta">
-          <a href="javascript:void(0)" onclick="showPost()">Read Post &rarr;</a>
+          <a href="javascript:void(0)" onclick="showPost()" data-i18n="blog_read_post">Read Post &rarr;</a>
         </div>
       </div>
     </div>
@@ -356,9 +381,9 @@
 
   <!-- Contact -->
   <section id="contact" class="contact-section">
-    <div class="section-label">Get in Touch</div>
-    <h2 class="section-title">Let's Build Something Together</h2>
-    <p class="contact-desc">Open to full-time roles, freelance projects, and open-source collaboration. Drop me a line and I'll get back to you.</p>
+    <div class="section-label" data-i18n="contact_label">Get in Touch</div>
+    <h2 class="section-title" data-i18n="contact_title">Let's Build Something Together</h2>
+    <p class="contact-desc" data-i18n="contact_desc">Open to full-time roles, freelance projects, and open-source collaboration. Drop me a line and I'll get back to you.</p>
     <div class="contact-buttons">
       <a href="mailto:khairij@gmail.com" class="btn btn-primary">&#9993; Email </a>
       <a href="https://github.com/harrysuke" class="btn btn-secondary">GitHub </a>
@@ -371,7 +396,7 @@
 
   <!-- Blog Post (full article view, hidden by default) -->
   <article class="blog-post" id="post-page" style="max-width: 880px; margin: 0 auto; padding: 3.5rem 1.5rem;">
-    <div class="blog-post-back" onclick="hidePost()">
+    <div class="blog-post-back" onclick="hidePost()" data-i18n="blog_back">
       &larr; Back to Portfolio
     </div>
     <div class="blog-post-header">
@@ -400,19 +425,19 @@
 
     <!-- Navigate column -->
     <div class="fat-footer-col">
-      <h4 class="fat-footer-heading">Navigate</h4>
+      <h4 class="fat-footer-heading" data-i18n="footer_navigate">Navigate</h4>
       <ul class="fat-footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#work" data-i18n="nav_work">Work</a></li>
+        <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
       </ul>
     </div>
 
     <!-- Connect column -->
     <div class="fat-footer-col">
-      <h4 class="fat-footer-heading">Connect</h4>
+      <h4 class="fat-footer-heading" data-i18n="footer_connect">Connect</h4>
       <ul class="fat-footer-links">
         <li><a href="mailto:khairij@gmail.com">Email</a></li>
         <li><a href="https://github.com/harrysuke" target="_blank" rel="noopener">GitHub</a></li>
@@ -423,12 +448,12 @@
 
     <!-- Repos column -->
     <div class="fat-footer-col">
-      <h4 class="fat-footer-heading">Repositories</h4>
+      <h4 class="fat-footer-heading" data-i18n="footer_repositories">Repositories</h4>
       <ul class="fat-footer-links">
         <li><a href="https://github.com/harrysuke/Bonafoid" target="_blank" rel="noopener">Bonafoid</a></li>
         <li><a href="https://github.com/harrysuke/ASP.NET-Core-MVC-SQLite" target="_blank" rel="noopener">ASP.NET MVC</a></li>
         <li><a href="https://github.com/harrysuke/springsqlite" target="_blank" rel="noopener">Spring Boot + JTE</a></li>
-        <li><a href="https://github.com/harrysuke?tab=repositories" target="_blank" rel="noopener">View All 169 &rarr;</a></li>
+        <li><a href="https://github.com/harrysuke?tab=repositories" target="_blank" rel="noopener" data-i18n="footer_view_all">View All 169 &rarr;</a></li>
       </ul>
     </div>
   </div>
@@ -438,7 +463,7 @@
 <div class="search-overlay" id="searchOverlay" onclick="closeSearchOnOverlay(event)">
   <div class="search-modal" onclick="event.stopPropagation()">
     <div class="search-modal-header">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search blog posts, repos, pages, links..." oninput="filterSearch()" autocomplete="off">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search blog posts, repos, pages, links..." oninput="filterSearch()" autocomplete="off" data-i18n-placeholder="search_placeholder">
       <button class="search-close" onclick="closeSearch()" aria-label="Close search">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 6 6 18"/>
@@ -449,7 +474,7 @@
     <div class="search-results" id="searchResults">
       <!-- Quick Nav -->
       <div class="search-section">
-        <div class="search-section-label">Navigation</div>
+        <div class="search-section-label" data-i18n="search_nav">Navigation</div>
         <div class="search-items">
           <a href="#about" class="search-item" onclick="closeSearch()">
             <span class="search-item-icon">&#9783;</span>
@@ -475,7 +500,7 @@
       </div>
       <!-- Social Links -->
       <div class="search-section">
-        <div class="search-section-label">Social</div>
+        <div class="search-section-label" data-i18n="search_social">Social</div>
         <div class="search-items">
           <a href="mailto:khairij@gmail.com" class="search-item" onclick="closeSearch()">
             <span class="search-item-icon">&#9993;</span>
@@ -501,7 +526,7 @@
       </div>
       <!-- Blog Posts -->
       <div class="search-section">
-        <div class="search-section-label">Blog Posts</div>
+        <div class="search-section-label" data-i18n="search_blog">Blog Posts</div>
         <div class="search-items">
           <a href="https://harrysuke.github.io/2026/10/26/asp-net-core-mvc-sqlite/" class="search-item" onclick="closeSearch()" data-search="asp.net-core-mvc-sqlite csharp c# blog post article">
             <span class="search-item-icon">&#9998;</span>
@@ -597,7 +622,7 @@
       </div>
       <!-- Repo Links -->
       <div class="search-section">
-        <div class="search-section-label">Repositories</div>
+        <div class="search-section-label" data-i18n="search_repos">Repositories</div>
         <div class="search-items" id="repoSearchItems">
           <a href="https://github.com/harrysuke/Bonafoid" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="bonafoid rust workflow platform tauri typescript javascript python">
             <span class="search-item-icon">&#9783;</span>
@@ -646,7 +671,7 @@
           </a>
         </div>
       </div>
-      <div class="search-empty" id="searchEmpty" style="display:none;">No results found</div>
+      <div class="search-empty" id="searchEmpty" style="display:none;" data-i18n="search_empty">No results found</div>
     </div>
   </div>
 </div>
@@ -748,6 +773,131 @@
       openSearch();
     }
   });
+
+  /* Translation System */
+  var i18n = {
+    en: {
+      nav_about: "About", nav_skills: "Skills", nav_work: "Work", nav_blog: "Blog", nav_contact: "Contact",
+      hero_tagline: "Full-stack developer crafting workflows, web apps, and systems across Rust, Kotlin, C#, and beyond.",
+      hero_desc: "I build things that work—from low-code workflow platforms to full-stack CRUD apps across a dozen languages and frameworks. 169 public repositories on GitHub and counting. Currently exploring Rust + Tauri for cross-platform desktop and mobile.",
+      about_label: "About", about_title: "Who I Am",
+      about_background_title: "Background",
+      about_background_desc: "Software developer with experience spanning backend systems, web applications, mobile apps, and desktop tools. I enjoy learning new stacks and have built projects in Rust, Kotlin, C#, Java, C++, PHP, Python, Dart, JavaScript, and more.",
+      about_focus_title: "Focus Areas",
+      about_focus_desc: "Full-stack web development, cross-platform desktop/mobile apps (Tauri, Flutter, Electron), workflow automation & low-code platforms, and RESTful API design with clean architecture.",
+      about_currently_title: "Currently",
+      about_currently_desc: "Building Bonafoid—an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.",
+      about_opentoWork_title: "Open to Work",
+      about_opentoWork_desc: "Actively seeking opportunities. Available for full-stack development roles, freelance projects, and collaboration on open-source. 169 repos, 21 followers on GitHub.",
+      skills_label: "Skills Inventory",
+      skills_title: "Technologies from My GitHub Repos",
+      skills_desc: "Derived from 169 public repositories. Tags weighted by repository count.",
+      skills_backend: "Backend Languages", skills_frontend: "Frontend",
+      skills_frameworks: "Frameworks & Libraries", skills_databases: "Databases",
+      skills_mobile: "Mobile & Desktop", skills_devops: "DevOps & Tools",
+      skills_architecture: "Architecture & Patterns",
+      work_label: "Selected Work", work_title: "Case Studies & Projects",
+      work_bonafoid_desc: "Open-source workflow platform that automatically translates visual models and business workflows into web, desktop (via Tauri), and mobile (via PWA) applications.",
+      work_aspnet_desc: "ASP.NET Core MVC application with SQLite, Docker containerization, and CI/CD pipeline. Demonstrates modern .NET development with Entity Framework Core.",
+      work_springboot_desc: "Spring Boot Kotlin application using JTE template engine and SQLite database with vanilla JS Fetch API. Part of a series exploring Spring Boot patterns with different frontend approaches.",
+      work_ucua_desc: "Mobile application programming project built with Flutter and REST API integration. Cross-platform mobile development with a clean UI and backend communication.",
+      work_htmx_desc: "Spring Boot 4.1 with Kotlin, JSP, and HTMX for hypermedia-driven applications. Explores the HTMX approach to building dynamic web apps without heavy JavaScript frameworks.",
+      work_sns_desc: "Safety and security system written in C++. Part of a broader series exploring the same domain across multiple languages including Java (command line, Spring MVC with REST API).",
+      work_nodejs_desc: "Node.js application with MongoDB and Express framework using Handlebars templating. Full-stack JavaScript CRUD application.",
+      work_flask_desc: "Python Flask application with MySQL CRUD operations. Clean and lightweight web application demonstrating Python web development patterns.",
+      work_view_repo: "View Repository →", work_view_all: "View All 169 Repositories →",
+      blog_label: "Blog", blog_title: "Latest Posts",
+      blog_hello_desc: "Welcome to My GitHub Pages Blog! Hello, world! This is my very first post on my new GitHub Pages blog. I'm excited to start sharing my journey, projects, and discoveries with you all. Whether it's coding tips, project updates, or lessons learned…",
+      blog_read_post: "Read Post →", blog_back: "← Back to Portfolio",
+      contact_label: "Get in Touch", contact_title: "Let's Build Something Together",
+      contact_desc: "Open to full-time roles, freelance projects, and open-source collaboration. Drop me a line and I'll get back to you.",
+      footer_navigate: "Navigate", footer_connect: "Connect",
+      footer_repositories: "Repositories", footer_view_all: "View All 169 →",
+      search_nav: "Navigation", search_social: "Social",
+      search_blog: "Blog Posts", search_repos: "Repositories",
+      search_empty: "No results found",
+      search_placeholder: "Search blog posts, repos, pages, links..."
+    },
+    ms: {
+      nav_about: "Tentang", nav_skills: "Kemahiran", nav_work: "Kerja", nav_blog: "Blog", nav_contact: "Hubungi",
+      hero_tagline: "Pembangun full-stack yang membina aliran kerja, aplikasi web, dan sistem menggunakan Rust, Kotlin, C#, dan banyak lagi.",
+      hero_desc: "Saya membina perkara yang berfungsi—daripada platform aliran kerja low-code hingga aplikasi CRUD full-stack merentasi berpuluh bahasa dan rangka kerja. 169 repositori awam di GitHub dan terus bertambah. Kini meneroka Rust + Tauri untuk aplikasi desktop dan mudah alih merentas platform.",
+      about_label: "Tentang", about_title: "Siapa Saya",
+      about_background_title: "Latar Belakang",
+      about_background_desc: "Pembangun perisian dengan pengalaman merangkumi sistem backend, aplikasi web, aplikasi mudah alih, dan alatan desktop. Saya gemar mempelajari teknologi baharu dan telah membina projek dalam Rust, Kotlin, C#, Java, C++, PHP, Python, Dart, JavaScript, dan banyak lagi.",
+      about_focus_title: "Bidang Fokus",
+      about_focus_desc: "Pembangunan web full-stack, aplikasi desktop/mudah alih merentas platform (Tauri, Flutter, Electron), automasi aliran kerja & platform low-code, serta reka bentuk RESTful API dengan seni bina yang bersih.",
+      about_currently_title: "Kini",
+      about_currently_desc: "Membina Bonafoid—platform aliran kerja sumber terbuka yang menterjemah model visual kepada aplikasi web, desktop (Tauri), dan mudah alih (PWA). Juga meneroka Spring Boot + HTMX dan corak ASP.NET Core MVC.",
+      about_opentoWork_title: "Terbuka untuk Kerja",
+      about_opentoWork_desc: "Sedang mencari peluang. Boleh dipertimbangkan untuk peranan pembangunan full-time, projek bebas, dan kolaborasi sumber terbuka. 169 repositori, 21 pengikut di GitHub.",
+      skills_label: "Inventori Kemahiran",
+      skills_title: "Teknologi daripada Repositori GitHub Saya",
+      skills_desc: "Diperoleh daripada 169 repositori awam. Tag diwajarkan mengikut bilangan repositori.",
+      skills_backend: "Bahasa Backend", skills_frontend: "Frontend",
+      skills_frameworks: "Rangka Kerja & Perpustakaan", skills_databases: "Pangkalan Data",
+      skills_mobile: "Mudah Alih & Desktop", skills_devops: "DevOps & Alatan",
+      skills_architecture: "Seni Bina & Corak",
+      work_label: "Kerja Terpilih", work_title: "Kajian Kes & Projek",
+      work_bonafoid_desc: "Platform aliran kerja sumber terbuka yang secara automatik menterjemah model visual dan aliran kerja perniagaan kepada aplikasi web, desktop (melalui Tauri), dan mudah alih (melalui PWA).",
+      work_aspnet_desc: "Aplikasi ASP.NET Core MVC dengan SQLite, penampung Docker, dan aliran CI/CD. Menunjukkan pembangunan .NET moden dengan Entity Framework Core.",
+      work_springboot_desc: "Aplikasi Kotlin Spring Boot menggunakan enjin templat JTE dan pangkalan data SQLite dengan vanilla JS Fetch API. Sebahagian daripada siri yang meneroka corak Spring Boot dengan pendekatan frontend berbeza.",
+      work_ucua_desc: "Projek pengaturcaraan aplikasi mudah alih dibina dengan Flutter dan integrasi REST API. Pembangunan mudah alih merentas platform dengan UI yang bersih dan komunikasi backend.",
+      work_htmx_desc: "Spring Boot 4.1 dengan Kotlin, JSP, dan HTMX untuk aplikasi hypermedia-driven. Meneroka pendekatan HTMX untuk membina aplikasi web dinamik tanpa rangka kerja JavaScript yang berat.",
+      work_sns_desc: "Sistem keselamatan dan keselamatan ditulis dalam C++. Sebahagian daripada siri yang lebih luas yang meneroka domain yang sama merentasi beberapa bahasa termasuk Java (baris arahan, Spring MVC dengan REST API).",
+      work_nodejs_desc: "Aplikasi Node.js dengan MongoDB dan rangka kerja Express menggunakan templating Handlebars. Aplikasi CRUD JavaScript full-stack.",
+      work_flask_desc: "Aplikasi Python Flask dengan operasi CRUD MySQL. Aplikasi web yang bersih dan ringan yang menunjukkan corak pembangunan web Python.",
+      work_view_repo: "Lihat Repositori →", work_view_all: "Lihat Semua 169 Repositori →",
+      blog_label: "Blog", blog_title: "Catatan Terkini",
+      blog_hello_desc: "Selamat datang ke Blog GitHub Pages Saya! Helo, dunia! Ini adalah catatan pertama saya di blog GitHub Pages baharu saya. Saya teruja untuk mula berkongsi perjalanan, projek, dan penemuan saya dengan anda semua. Samada tip pengaturcaraan, kemas kini projek, atau pengajaran yang dipelajari…",
+      blog_read_post: "Baca Catatan →", blog_back: "← Kembali ke Portfolio",
+      contact_label: "Hubungi Saya", contact_title: "Mari Bina Sesuatu Bersama",
+      contact_desc: "Terbuka untuk peranan sepenuh masa, projek bebas, dan kolaborasi sumber terbuka. Hantar mesej kepada saya dan saya akan membalas anda.",
+      footer_navigate: "Navigasi", footer_connect: "Hubung",
+      footer_repositories: "Repositori", footer_view_all: "Lihat Semua 169 →",
+      search_nav: "Navigasi", search_social: "Sosial",
+      search_blog: "Catatan Blog", search_repos: "Repositori",
+      search_empty: "Tiada keputusan dijumpai",
+      search_placeholder: "Cari catatan blog, repositori, halaman, pautan..."
+    }
+  };
+
+  function setLanguage(lang) {
+    if (!i18n[lang]) return;
+    localStorage.setItem('portfolio-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
+    });
+    document.querySelectorAll('.translate-option').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    var label = document.getElementById('currentLang');
+    if (label) label.textContent = lang === 'ms' ? 'MS' : 'EN';
+    var dropdown = document.getElementById('translateDropdown');
+    if (dropdown) dropdown.classList.remove('active');
+  }
+
+  function toggleTranslateMenu() {
+    var dropdown = document.getElementById('translateDropdown');
+    if (dropdown) dropdown.classList.toggle('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    var wrap = document.querySelector('.nav-translate-wrap');
+    var dropdown = document.getElementById('translateDropdown');
+    if (wrap && dropdown && !wrap.contains(e.target)) dropdown.classList.remove('active');
+  });
+
+  (function() {
+    var stored = localStorage.getItem('portfolio-lang');
+    if (stored && stored !== 'en') setLanguage(stored);
+  })();
 </script>
 
 </body>
