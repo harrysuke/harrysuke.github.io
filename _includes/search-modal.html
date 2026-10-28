@@ -2,7 +2,7 @@
 <div class="search-overlay" id="searchOverlay" onclick="closeSearchOnOverlay(event)">
   <div class="search-modal" onclick="event.stopPropagation()">
     <div class="search-modal-header">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search repos, pages, links..." oninput="filterSearch()" autocomplete="off">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search blog posts, repos, pages, links..." oninput="filterSearch()" autocomplete="off">
       <button class="search-close" onclick="closeSearch()" aria-label="Close search">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 6 6 18"/>
@@ -61,6 +61,19 @@
             <span class="search-item-text">ResearchGate</span>
             <span class="search-item-meta">Kairi Juri</span>
           </a>
+        </div>
+      </div>
+      <!-- Blog Posts -->
+      <div class="search-section">
+        <div class="search-section-label">Blog Posts</div>
+        <div class="search-items">
+          {% for post in site.posts %}
+          <a href="{{ post.url | relative_url }}" class="search-item" onclick="closeSearch()" data-search="{{ post.title | downcase | escape }} {{ post.categories | join: ' ' | downcase }} {{ post.tags | join: ' ' | downcase }} blog post article">
+            <span class="search-item-icon">&#9998;</span>
+            <span class="search-item-text">{{ post.title }}</span>
+            <span class="search-item-meta">{{ post.date | date_to_string }}{% if post.categories.size > 0 %} &middot; {{ post.categories | join: ', ' }}{% endif %}</span>
+          </a>
+          {% endfor %}
         </div>
       </div>
       <!-- Repo Links -->
