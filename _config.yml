@@ -11,3 +11,4 @@ markdown: kramdown
 highlighter: rouge
 permalink: pretty
 excerpt_separator: ""
+plugins: []
