@@ -29,7 +29,7 @@ pagination:
   {% if paginator.total_pages > 1 %}
   <div class="pagination">
     {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-link pagination-prev">&larr; Newer</a>
+    <a href="{{ paginator.previous_page_path }}" class="pagination-link pagination-prev">&larr; Newer</a>
     {% else %}
     <span class="pagination-link pagination-disabled">&larr; Newer</span>
     {% endif %}
@@ -44,16 +44,14 @@ pagination:
       {% for page in (2..paginator.total_pages) %}
         {% if page == paginator.page %}
         <span class="pagination-page pagination-current">{{ page }}</span>
-        {% elsif page == 1 %}
-        <a href="{{ '/blog/' | relative_url }}" class="pagination-page">1</a>
         {% else %}
-        <a href="{{ site.pagination.permalink | replace: ':num', page | relative_url }}" class="pagination-page">{{ page }}</a>
+        <a href="/blog/page{{ page }}/" class="pagination-page">{{ page }}</a>
         {% endif %}
       {% endfor %}
     </div>
 
     {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-link pagination-next">Older &rarr;</a>
+    <a href="{{ paginator.next_page_path }}" class="pagination-link pagination-next">Older &rarr;</a>
     {% else %}
     <span class="pagination-link pagination-disabled">Older &rarr;</span>
     {% endif %}
