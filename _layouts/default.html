@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  {% include head.html %}
+  <body>
+    {% include nav.html %}
+    <main>
+      {{ content }}
+    </main>
+    <footer class="footer">
+      <div style="max-width: 880px; margin: 0 auto; padding: 0 1.5rem;">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with minimalism in mind.</p>
+      </div>
+    </footer>
+  </body>
+</html>

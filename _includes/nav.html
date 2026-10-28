@@ -1,0 +1,28 @@
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="{{ '/' | relative_url }}" class="nav-brand">{{ site.title }}</a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link-text">About</a></li>
+      <li><a href="#skills" class="nav-link-text">Skills</a></li>
+      <li><a href="#work" class="nav-link-text">Work</a></li>
+      <li><a href="#blog" class="nav-link-text">Blog</a></li>
+      <li><a href="#contact" class="nav-link-text">Contact</a></li>
+      <li>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="icon-moon">&#9790;</span>
+          <span class="icon-sun">&#9728;</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('portfolio-theme', next);
+  }
+</script>

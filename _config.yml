@@ -1,0 +1,13 @@
+title: Kairi Juri
+tagline: Full-Stack Developer
+description: >-
+  Portfolio of Kairi Juri — full-stack developer crafting workflows, web apps,
+  and systems across Rust, Kotlin, C#, Java, and beyond.
+url: https://harrysuke.github.io
+author:
+  name: Kairi Juri
+  email: khairij@gmail.com
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+excerpt_separator: ""

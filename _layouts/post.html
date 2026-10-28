@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<article class="blog-post active" id="post-page">
+  <div class="blog-post-back" onclick="history.back()">
+    &larr; Back to Portfolio
+  </div>
+  <div class="blog-post-header">
+    <h1 class="blog-post-title">{{ page.title }}</h1>
+    <span class="blog-post-date">{{ page.date | date_to_string }}</span>
+  </div>
+  <div class="blog-post-body">
+    {{ content }}
+  </div>
+</article>
