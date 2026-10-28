@@ -8,6 +8,14 @@
       <li><a href="{{ '/blog/' | relative_url }}" class="nav-link-text">Blog</a></li>
       <li><a href="{{ '/' | relative_url }}#contact" class="nav-link-text">Contact</a></li>
       <li>
+        <button class="nav-search-btn" onclick="openSearch()" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </li>
+      <li>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span class="icon-moon">&#9790;</span>
           <span class="icon-sun">&#9728;</span>
