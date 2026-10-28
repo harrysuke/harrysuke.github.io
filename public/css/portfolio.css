@@ -413,13 +413,6 @@ section:last-of-type { border-bottom: none; }
   align-items: center;
   gap: 0.5rem;
 }
-.skills-group-title svg,
-.skills-group-title .skills-group-icon {
-  width: 18px;
-  height: 18px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
 .skills-group-title::before {
   content: '';
   width: 3px;
