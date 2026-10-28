@@ -303,8 +303,7 @@ title: Kairi Juri
   <h2 class="section-title">Latest Posts</h2>
   <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Thoughts, tutorials, and project write-ups.</p>
   <div class="work-grid" style="grid-template-columns: 1fr;">
-    {% assign recent_posts = site.posts | limit: 3 %}
-    {% for post in recent_posts %}
+    {% for post in site.posts limit: 3 %}
     <div class="work-card">
       <div class="work-card-header">
         <h3><a href="{{ post.url }}" style="color: inherit;">{{ post.title }}</a></h3>
