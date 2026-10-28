@@ -40,10 +40,22 @@ title: Kairi Juri
 <section id="skills">
   <div class="section-label">Skills Inventory</div>
   <h2 class="section-title">Technologies from My GitHub Repos</h2>
-  <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Derived from 169 public repositories. Tags weighted by repository count.</p>
+  <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Derived from 169 public repositories. Tags weighted by repository count.</p>
+
+  <div class="skills-tabs" id="skillsTabs">
+    <button class="skills-tab active" data-filter="all" onclick="filterSkills('all')">All</button>
+    <button class="skills-tab" data-filter="backend" onclick="filterSkills('backend')">Backend</button>
+    <button class="skills-tab" data-filter="frontend" onclick="filterSkills('frontend')">Frontend</button>
+    <button class="skills-tab" data-filter="frameworks" onclick="filterSkills('frameworks')">Frameworks</button>
+    <button class="skills-tab" data-filter="databases" onclick="filterSkills('databases')">Databases</button>
+    <button class="skills-tab" data-filter="mobile" onclick="filterSkills('mobile')">Mobile</button>
+    <button class="skills-tab" data-filter="devops" onclick="filterSkills('devops')">DevOps</button>
+    <button class="skills-tab" data-filter="ai" onclick="filterSkills('ai')">AI</button>
+    <button class="skills-tab" data-filter="architecture" onclick="filterSkills('architecture')">Architecture</button>
+  </div>
 
   <!-- Backend Languages -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="backend">
     <div class="skills-group-title">Backend</div>
     <div class="skill-tags">
       <span class="skill-tag">Kotlin <span class="skill-count">6</span></span>
@@ -57,7 +69,7 @@ title: Kairi Juri
   </div>
 
   <!-- Frontend -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="frontend">
     <div class="skills-group-title">Frontend</div>
     <div class="skill-tags">
       <span class="skill-tag">JavaScript <span class="skill-count">2</span></span>
@@ -73,7 +85,7 @@ title: Kairi Juri
   </div>
 
   <!-- Frameworks -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="frameworks">
     <div class="skills-group-title">Frameworks &amp; Libraries</div>
     <div class="skill-tags">
       <span class="skill-tag">Spring Boot / Spring MVC <span class="skill-count">4</span></span>
@@ -90,7 +102,7 @@ title: Kairi Juri
   </div>
 
   <!-- Databases -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="databases">
     <div class="skills-group-title">Databases</div>
     <div class="skill-tags">
       <span class="skill-tag">SQLite</span>
@@ -104,7 +116,7 @@ title: Kairi Juri
   </div>
 
   <!-- Mobile & Desktop -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="mobile">
     <div class="skills-group-title">Mobile &amp; Desktop</div>
     <div class="skill-tags">
       <span class="skill-tag">Flutter</span>
@@ -116,7 +128,7 @@ title: Kairi Juri
   </div>
 
   <!-- DevOps & Tools -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="devops">
     <div class="skills-group-title">DevOps &amp; Tools</div>
     <div class="skill-tags">
       <span class="skill-tag">Docker</span>
@@ -130,7 +142,7 @@ title: Kairi Juri
   </div>
 
   <!-- Generative AI & LLM Engineering -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="ai">
     <div class="skills-group-title">Generative AI &amp; LLM Engineering</div>
     <div class="skill-tags">
       <span class="skill-tag">Prompt Engineering</span>
@@ -145,7 +157,7 @@ title: Kairi Juri
   </div>
 
   <!-- Architecture & Patterns -->
-  <div class="skills-group">
+  <div class="skills-group" data-category="architecture">
     <div class="skills-group-title">Architecture &amp; Patterns</div>
     <div class="skill-tags">
       <span class="skill-tag">MVC</span>
@@ -361,3 +373,22 @@ title: Kairi Juri
     </a>
   </div>
 </section>
+
+<script>
+  function filterSkills(category) {
+    var groups = document.querySelectorAll('#skills .skills-group');
+    var tabs = document.querySelectorAll('#skillsTabs .skills-tab');
+
+    tabs.forEach(function(tab) {
+      tab.classList.toggle('active', tab.getAttribute('data-filter') === category);
+    });
+
+    groups.forEach(function(group) {
+      if (category === 'all' || group.getAttribute('data-category') === category) {
+        group.classList.remove('hidden');
+      } else {
+        group.classList.add('hidden');
+      }
+    });
+  }
+</script>

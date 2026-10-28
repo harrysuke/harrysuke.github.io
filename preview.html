@@ -119,9 +119,20 @@
   <section id="skills">
     <div class="section-label" data-i18n="skills_label">Skills Inventory</div>
     <h2 class="section-title" data-i18n="skills_title">Technologies from My GitHub Repos</h2>
-    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;" data-i18n="skills_desc">Derived from 169 public repositories. Tags weighted by repository count.</p>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;" data-i18n="skills_desc">Derived from 169 public repositories. Tags weighted by repository count.</p>
 
-    <div class="skills-group">
+    <div class="skills-tabs" id="skillsTabs">
+      <button class="skills-tab active" data-filter="all" onclick="filterSkills('all')" data-i18n="tab_all">All</button>
+      <button class="skills-tab" data-filter="backend" onclick="filterSkills('backend')" data-i18n="tab_backend">Backend</button>
+      <button class="skills-tab" data-filter="frontend" onclick="filterSkills('frontend')" data-i18n="tab_frontend">Frontend</button>
+      <button class="skills-tab" data-filter="frameworks" onclick="filterSkills('frameworks')" data-i18n="tab_frameworks">Frameworks</button>
+      <button class="skills-tab" data-filter="databases" onclick="filterSkills('databases')" data-i18n="tab_databases">Databases</button>
+      <button class="skills-tab" data-filter="mobile" onclick="filterSkills('mobile')" data-i18n="tab_mobile">Mobile</button>
+      <button class="skills-tab" data-filter="devops" onclick="filterSkills('devops')" data-i18n="tab_devops">DevOps</button>
+      <button class="skills-tab" data-filter="architecture" onclick="filterSkills('architecture')" data-i18n="tab_architecture">Architecture</button>
+    </div>
+
+    <div class="skills-group" data-category="backend">
       <div class="skills-group-title" data-i18n="skills_backend">Backend Languages</div>
       <div class="skill-tags">
         <span class="skill-tag">Kotlin <span class="skill-count">6</span></span>
@@ -135,7 +146,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="frontend">
       <div class="skills-group-title" data-i18n="skills_frontend">Frontend</div>
       <div class="skill-tags">
         <span class="skill-tag">JavaScript <span class="skill-count">2</span></span>
@@ -149,7 +160,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="frameworks">
       <div class="skills-group-title" data-i18n="skills_frameworks">Frameworks &amp; Libraries</div>
       <div class="skill-tags">
         <span class="skill-tag">Spring Boot / Spring MVC <span class="skill-count">4</span></span>
@@ -165,7 +176,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="databases">
       <div class="skills-group-title" data-i18n="skills_databases">Databases</div>
       <div class="skill-tags">
         <span class="skill-tag">SQLite</span>
@@ -177,7 +188,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="mobile">
       <div class="skills-group-title" data-i18n="skills_mobile">Mobile &amp; Desktop</div>
       <div class="skill-tags">
         <span class="skill-tag">Flutter</span>
@@ -188,7 +199,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="devops">
       <div class="skills-group-title" data-i18n="skills_devops">DevOps &amp; Tools</div>
       <div class="skill-tags">
         <span class="skill-tag">Docker</span>
@@ -201,7 +212,7 @@
       </div>
     </div>
 
-    <div class="skills-group">
+    <div class="skills-group" data-category="architecture">
       <div class="skills-group-title" data-i18n="skills_architecture">Architecture &amp; Patterns</div>
       <div class="skill-tags">
         <span class="skill-tag">MVC</span>
@@ -677,6 +688,23 @@
 </div>
 
 <script>
+  function filterSkills(category) {
+    var groups = document.querySelectorAll('#skills .skills-group');
+    var tabs = document.querySelectorAll('#skillsTabs .skills-tab');
+
+    tabs.forEach(function(tab) {
+      tab.classList.toggle('active', tab.getAttribute('data-filter') === category);
+    });
+
+    groups.forEach(function(group) {
+      if (category === 'all' || group.getAttribute('data-category') === category) {
+        group.classList.remove('hidden');
+      } else {
+        group.classList.add('hidden');
+      }
+    });
+  }
+
   function toggleTheme() {
     var html = document.documentElement;
     var current = html.getAttribute('data-theme');
@@ -816,7 +844,10 @@
       search_nav: "Navigation", search_social: "Social",
       search_blog: "Blog Posts", search_repos: "Repositories",
       search_empty: "No results found",
-      search_placeholder: "Search blog posts, repos, pages, links..."
+      search_placeholder: "Search blog posts, repos, pages, links...",
+      tab_all: "All", tab_backend: "Backend", tab_frontend: "Frontend",
+      tab_frameworks: "Frameworks", tab_databases: "Databases",
+      tab_mobile: "Mobile", tab_devops: "DevOps", tab_architecture: "Architecture"
     },
     ms: {
       nav_about: "Tentang", nav_skills: "Kemahiran", nav_work: "Kerja", nav_blog: "Blog", nav_contact: "Hubungi",
@@ -858,7 +889,10 @@
       search_nav: "Navigasi", search_social: "Sosial",
       search_blog: "Catatan Blog", search_repos: "Repositori",
       search_empty: "Tiada keputusan dijumpai",
-      search_placeholder: "Cari catatan blog, repositori, halaman, pautan..."
+      search_placeholder: "Cari catatan blog, repositori, halaman, pautan...",
+      tab_all: "Semua", tab_backend: "Backend", tab_frontend: "Frontend",
+      tab_frameworks: "Rangka Kerja", tab_databases: "Pangkalan Data",
+      tab_mobile: "Mudah Alih", tab_devops: "DevOps", tab_architecture: "Seni Bina"
     }
   };
 
