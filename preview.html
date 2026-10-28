@@ -40,6 +40,14 @@
       <li><a href="#blog" class="nav-link-text">Blog</a></li>
       <li><a href="#contact" class="nav-link-text">Contact</a></li>
       <li>
+        <button class="nav-search-btn" onclick="openSearch()" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </li>
+      <li>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
           <span class="icon-moon">&#9790;</span>
           <span class="icon-sun">&#9728;</span>
@@ -426,6 +434,127 @@
   </div>
 </footer>
 
+<!-- Search Modal -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearchOnOverlay(event)">
+  <div class="search-modal" onclick="event.stopPropagation()">
+    <div class="search-modal-header">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search repos, pages, links..." oninput="filterSearch()" autocomplete="off">
+      <button class="search-close" onclick="closeSearch()" aria-label="Close search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <!-- Quick Nav -->
+      <div class="search-section">
+        <div class="search-section-label">Navigation</div>
+        <div class="search-items">
+          <a href="#about" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">About</span>
+          </a>
+          <a href="#skills" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9881;</span>
+            <span class="search-item-text">Skills</span>
+          </a>
+          <a href="#work" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9874;</span>
+            <span class="search-item-text">Work</span>
+          </a>
+          <a href="#blog" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9998;</span>
+            <span class="search-item-text">Blog</span>
+          </a>
+          <a href="#contact" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9993;</span>
+            <span class="search-item-text">Contact</span>
+          </a>
+        </div>
+      </div>
+      <!-- Social Links -->
+      <div class="search-section">
+        <div class="search-section-label">Social</div>
+        <div class="search-items">
+          <a href="mailto:khairij@gmail.com" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9993;</span>
+            <span class="search-item-text">Email</span>
+            <span class="search-item-meta">khairij@gmail.com</span>
+          </a>
+          <a href="https://github.com/harrysuke" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">GitHub</span>
+            <span class="search-item-meta">github.com/harrysuke</span>
+          </a>
+          <a href="https://orcid.org/0009-0009-7172-0914" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9679;</span>
+            <span class="search-item-text">ORCiD</span>
+            <span class="search-item-meta">0009-0009-7172-0914</span>
+          </a>
+          <a href="https://www.researchgate.net/profile/Kairi-Juri" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()">
+            <span class="search-item-icon">&#9678;</span>
+            <span class="search-item-text">ResearchGate</span>
+            <span class="search-item-meta">Kairi Juri</span>
+          </a>
+        </div>
+      </div>
+      <!-- Repo Links -->
+      <div class="search-section">
+        <div class="search-section-label">Repositories</div>
+        <div class="search-items" id="repoSearchItems">
+          <a href="https://github.com/harrysuke/Bonafoid" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="bonafoid rust workflow platform tauri typescript javascript python">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">Bonafoid</span>
+            <span class="search-item-meta">Rust</span>
+          </a>
+          <a href="https://github.com/harrysuke/ASP.NET-Core-MVC-SQLite" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="asp.net core mvc sqlite docker ci-cd entity-framework c#">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">ASP.NET Core MVC + SQLite</span>
+            <span class="search-item-meta">C#</span>
+          </a>
+          <a href="https://github.com/harrysuke/springsqlite" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="spring boot jte sqlite kotlin fetch-api">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">Spring Boot + JTE + SQLite</span>
+            <span class="search-item-meta">Kotlin</span>
+          </a>
+          <a href="https://github.com/harrysuke/ucua_app" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="ucua mobile app flutter dart rest-api">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">UCUA Mobile App</span>
+            <span class="search-item-meta">Dart</span>
+          </a>
+          <a href="https://github.com/harrysuke/htmx_springboot" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="htmx spring boot kotlin jsp mysql">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">HTMX + Spring Boot</span>
+            <span class="search-item-meta">Kotlin</span>
+          </a>
+          <a href="https://github.com/harrysuke/snscpp" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="sns safety security c++ cpp">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">SNS Safety &amp; Security System</span>
+            <span class="search-item-meta">C++</span>
+          </a>
+          <a href="https://github.com/harrysuke/mongonode" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="node.js mongodb express handlebars javascript js">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">Node.js + MongoDB + Express</span>
+            <span class="search-item-meta">JS</span>
+          </a>
+          <a href="https://github.com/harrysuke/flask" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="python flask mysql crud">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">Python Flask CRUD</span>
+            <span class="search-item-meta">Python</span>
+          </a>
+          <a href="https://github.com/harrysuke?tab=repositories" target="_blank" rel="noopener" class="search-item" onclick="closeSearch()" data-search="all repositories github 169">
+            <span class="search-item-icon">&#9783;</span>
+            <span class="search-item-text">View All 169 Repositories</span>
+            <span class="search-item-meta">GitHub</span>
+          </a>
+        </div>
+      </div>
+      <div class="search-empty" id="searchEmpty" style="display:none;">No results found</div>
+    </div>
+  </div>
+</div>
+
 <script>
   function toggleTheme() {
     var html = document.documentElement;
@@ -461,6 +590,68 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
+
+  /* Search Modal */
+  function openSearch() {
+    var overlay = document.getElementById('searchOverlay');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      document.getElementById('searchInput').focus();
+    }, 100);
+  }
+
+  function closeSearch() {
+    var overlay = document.getElementById('searchOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('searchInput').value = '';
+    filterSearch();
+  }
+
+  function closeSearchOnOverlay(event) {
+    if (event.target === event.currentTarget) {
+      closeSearch();
+    }
+  }
+
+  function filterSearch() {
+    var query = document.getElementById('searchInput').value.toLowerCase().trim();
+    var sections = document.querySelectorAll('#searchResults .search-section');
+    var totalVisible = 0;
+
+    sections.forEach(function(section) {
+      var items = section.querySelectorAll('.search-item');
+      var sectionVisible = false;
+      items.forEach(function(item) {
+        var text = item.textContent.toLowerCase();
+        var dataSearch = (item.getAttribute('data-search') || '').toLowerCase();
+        if (!query || text.indexOf(query) !== -1 || dataSearch.indexOf(query) !== -1) {
+          item.style.display = '';
+          sectionVisible = true;
+          totalVisible++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      section.style.display = sectionVisible ? '' : 'none';
+    });
+
+    document.getElementById('searchEmpty').style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var overlay = document.getElementById('searchOverlay');
+      if (overlay.classList.contains('active')) {
+        closeSearch();
+      }
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
 </script>
 
 </body>
