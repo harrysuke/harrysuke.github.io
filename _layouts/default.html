@@ -3,11 +3,14 @@
   {% include head.html %}
   <body>
     {% include nav.html %}
-    <main>
-      {{ content }}
-    </main>
+    <div class="layout-wrapper">
+      {% include sidebar.html %}
+      <main>
+        {{ content }}
+      </main>
+    </div>
     <footer class="footer">
-      <div style="max-width: 880px; margin: 0 auto; padding: 0 1.5rem;">
+      <div style="max-width: 1120px; margin: 0 auto; padding: 0 1.5rem;">
         <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with minimalism in mind.</p>
       </div>
     </footer>
