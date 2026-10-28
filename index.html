@@ -297,12 +297,14 @@ title: Kairi Juri
   </div>
 </section>
 
-<!-- ============ BLOG ============ -->
+<!-- ============ BLOG TEASER ============ -->
 <section id="blog">
   <div class="section-label">Blog</div>
   <h2 class="section-title">Latest Posts</h2>
+  <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Thoughts, tutorials, and project write-ups.</p>
   <div class="work-grid" style="grid-template-columns: 1fr;">
-    {% for post in paginator.posts %}
+    {% assign recent_posts = site.posts | limit: 3 %}
+    {% for post in recent_posts %}
     <div class="work-card">
       <div class="work-card-header">
         <h3><a href="{{ post.url }}" style="color: inherit;">{{ post.title }}</a></h3>
@@ -315,41 +317,11 @@ title: Kairi Juri
     </div>
     {% endfor %}
   </div>
-
-  <!-- Pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-link pagination-prev">&larr; Newer</a>
-    {% else %}
-    <span class="pagination-link pagination-disabled">&larr; Newer</span>
-    {% endif %}
-
-    <div class="pagination-numbers">
-      {% if paginator.page == 1 %}
-      <span class="pagination-page pagination-current">1</span>
-      {% else %}
-      <a href="{{ '/' | relative_url }}" class="pagination-page">1</a>
-      {% endif %}
-
-      {% for page in (2..paginator.total_pages) %}
-        {% if page == paginator.page %}
-        <span class="pagination-page pagination-current">{{ page }}</span>
-        {% elsif page == 1 %}
-        <a href="{{ '/' | relative_url }}" class="pagination-page">1</a>
-        {% else %}
-        <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-page">{{ page }}</a>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-link pagination-next">Older &rarr;</a>
-    {% else %}
-    <span class="pagination-link pagination-disabled">Older &rarr;</span>
-    {% endif %}
+  <div style="text-align: center; margin-top: 2.5rem;">
+    <a href="{{ '/blog/' | relative_url }}" class="btn btn-secondary">
+      View All Posts &rarr;
+    </a>
   </div>
-  {% endif %}
 </section>
 
 <!-- ============ CONTACT ============ -->

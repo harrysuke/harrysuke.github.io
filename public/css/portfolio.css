@@ -586,12 +586,13 @@ section:last-of-type { border-bottom: none; }
   gap: 0.4rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--accent);
-  cursor: pointer;
   margin-bottom: 2rem;
+}
+.blog-post-back a {
+  color: var(--accent);
   transition: color var(--transition);
 }
-.blog-post-back:hover {
+.blog-post-back a:hover {
   color: var(--accent-hover);
 }
 
