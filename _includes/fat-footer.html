@@ -1,0 +1,44 @@
+<footer class="fat-footer">
+  <div class="fat-footer-inner">
+    <!-- Brand column -->
+    <div class="fat-footer-col fat-footer-brand">
+      <h3 class="fat-footer-name">{{ site.title }}</h3>
+      <p class="fat-footer-tagline">{{ site.description }}</p>
+      <p class="fat-footer-meta">&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with minimalism in mind.</p>
+    </div>
+
+    <!-- Navigate column -->
+    <div class="fat-footer-col">
+      <h4 class="fat-footer-heading">Navigate</h4>
+      <ul class="fat-footer-links">
+        <li><a href="{{ '/' | relative_url }}#about">About</a></li>
+        <li><a href="{{ '/' | relative_url }}#skills">Skills</a></li>
+        <li><a href="{{ '/' | relative_url }}#work">Work</a></li>
+        <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+        <li><a href="{{ '/' | relative_url }}#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect column -->
+    <div class="fat-footer-col">
+      <h4 class="fat-footer-heading">Connect</h4>
+      <ul class="fat-footer-links">
+        <li><a href="mailto:{{ site.author.email }}">Email</a></li>
+        <li><a href="https://github.com/harrysuke" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://orcid.org/0009-0009-7172-0914" target="_blank" rel="noopener">ORCiD</a></li>
+        <li><a href="https://www.researchgate.net/profile/Kairi-Juri" target="_blank" rel="noopener">ResearchGate</a></li>
+      </ul>
+    </div>
+
+    <!-- Repositories column -->
+    <div class="fat-footer-col">
+      <h4 class="fat-footer-heading">Repositories</h4>
+      <ul class="fat-footer-links">
+        <li><a href="https://github.com/harrysuke/Bonafoid" target="_blank" rel="noopener">Bonafoid</a></li>
+        <li><a href="https://github.com/harrysuke/ASP.NET-Core-MVC-SQLite" target="_blank" rel="noopener">ASP.NET MVC</a></li>
+        <li><a href="https://github.com/harrysuke/springsqlite" target="_blank" rel="noopener">Spring Boot + JTE</a></li>
+        <li><a href="https://github.com/harrysuke?tab=repositories" target="_blank" rel="noopener">View All 169 &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
