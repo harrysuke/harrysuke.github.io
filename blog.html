@@ -2,8 +2,6 @@
 layout: default
 title: Blog
 permalink: /blog/
-pagination:
-  enabled: true
 ---
 
 <!-- ============ BLOG ============ -->
@@ -11,7 +9,7 @@ pagination:
   <div class="section-label">Blog</div>
   <h2 class="section-title">Latest Posts</h2>
   <div class="work-grid" style="grid-template-columns: 1fr;">
-    {% for post in paginator.posts %}
+    {% for post in site.posts %}
     <div class="work-card">
       <div class="work-card-header">
         <h3><a href="{{ post.url }}" style="color: inherit;">{{ post.title }}</a></h3>
@@ -24,37 +22,4 @@ pagination:
     </div>
     {% endfor %}
   </div>
-
-  <!-- Pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="pagination-link pagination-prev">&larr; Newer</a>
-    {% else %}
-    <span class="pagination-link pagination-disabled">&larr; Newer</span>
-    {% endif %}
-
-    <div class="pagination-numbers">
-      {% if paginator.page == 1 %}
-      <span class="pagination-page pagination-current">1</span>
-      {% else %}
-      <a href="{{ '/blog/' | relative_url }}" class="pagination-page">1</a>
-      {% endif %}
-
-      {% for page in (2..paginator.total_pages) %}
-        {% if page == paginator.page %}
-        <span class="pagination-page pagination-current">{{ page }}</span>
-        {% else %}
-        <a href="/blog/page{{ page }}/" class="pagination-page">{{ page }}</a>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="pagination-link pagination-next">Older &rarr;</a>
-    {% else %}
-    <span class="pagination-link pagination-disabled">Older &rarr;</span>
-    {% endif %}
-  </div>
-  {% endif %}
 </section>
