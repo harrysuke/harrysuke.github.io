@@ -172,7 +172,10 @@ title: Kairi Juri
 <!-- ============ SELECTED WORK ============ -->
 <section id="work">
   <div class="section-label">Selected Work</div>
-  <h2 class="section-title">Case Studies &amp; Projects</h2>
+  <div class="section-header">
+    <h2 class="section-title">Case Studies &amp; Projects</h2>
+    <a href="https://github.com/harrysuke?tab=repositories" class="see-all">See All &rarr;</a>
+  </div>
   <div class="work-grid">
 
     <!-- Bonafoid -->
@@ -316,17 +319,13 @@ title: Kairi Juri
 
   </div>
 
-  <div style="text-align: center; margin-top: 2.5rem;">
-    <a href="https://github.com/harrysuke?tab=repositories" class="btn btn-secondary">
-      View All 169 Repositories &rarr;
-    </a>
-  </div>
 </section>
-
-<!-- ============ BLOG TEASER ============ -->
 <section id="blog">
   <div class="section-label">Blog</div>
-  <h2 class="section-title">Latest Posts</h2>
+  <div class="section-header">
+    <h2 class="section-title">Latest Posts</h2>
+    <a href="{{ '/blog/' | relative_url }}" class="see-all">See All &rarr;</a>
+  </div>
   <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Thoughts, tutorials, and project write-ups.</p>
   <div class="work-grid" style="grid-template-columns: 1fr;">
     {% for post in site.posts limit: 3 %}
@@ -341,11 +340,6 @@ title: Kairi Juri
       </div>
     </div>
     {% endfor %}
-  </div>
-  <div style="text-align: center; margin-top: 2.5rem;">
-    <a href="{{ '/blog/' | relative_url }}" class="btn btn-secondary">
-      View All Posts &rarr;
-    </a>
   </div>
 </section>
 
