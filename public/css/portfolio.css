@@ -96,6 +96,56 @@ a:hover { color: var(--accent-hover); }
   letter-spacing: -0.01em;
 }
 .nav-brand:hover { color: var(--accent); }
+.nav-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+.nav-hamburger:hover {
+  background: var(--bg-card);
+  color: var(--accent);
+}
+.nav-hamburger svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+@media (min-width: 901px) {
+  .nav-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Sidebar hidden state */
+.sidebar {
+  flex-shrink: 0;
+  width: 240px;
+  position: sticky;
+  top: 72px;
+  transition: width 0.25s ease, opacity 0.25s ease, margin 0.25s ease, visibility 0.25s ease;
+}
+.sidebar.sidebar-hidden {
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+  margin-right: -2rem;
+}
+.sidebar.sidebar-hidden .sidebar-card {
+  display: none;
+}
 .nav-links {
   display: flex;
   align-items: center;
