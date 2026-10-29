@@ -37,8 +37,10 @@
 <script>
   function toggleSidebar() {
     var sidebar = document.querySelector('.sidebar');
+    var wrapper = document.querySelector('.layout-wrapper');
     if (sidebar) {
       sidebar.classList.toggle('sidebar-hidden');
+      if (wrapper) wrapper.classList.toggle('sidebar-collapsed', sidebar.classList.contains('sidebar-hidden'));
       localStorage.setItem('portfolio-sidebar', sidebar.classList.contains('sidebar-hidden') ? 'hidden' : 'visible');
     }
   }
@@ -46,7 +48,9 @@
     var stored = localStorage.getItem('portfolio-sidebar');
     if (stored === 'hidden') {
       var sidebar = document.querySelector('.sidebar');
+      var wrapper = document.querySelector('.layout-wrapper');
       if (sidebar) sidebar.classList.add('sidebar-hidden');
+      if (wrapper) wrapper.classList.add('sidebar-collapsed');
     }
   })();
 

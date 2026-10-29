@@ -146,6 +146,9 @@ a:hover { color: var(--accent-hover); }
 .sidebar.sidebar-hidden .sidebar-card {
   display: none;
 }
+.layout-wrapper.sidebar-collapsed main {
+  max-width: 100%;
+}
 .nav-links {
   display: flex;
   align-items: center;
