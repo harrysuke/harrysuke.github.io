@@ -1,0 +1,83 @@
+# -----------------------------------------------------------------------------
+# Mirror this Jekyll repository (all branches, tags and full history) to
+# https://gitlab.com/harrysuke/khairijuri.git
+#
+# ONE-TIME SETUP on the GitLab project that RUNS this pipeline:
+#   Settings > CI/CD > Variables > Add variable
+#     Key:   GITLAB_MIRROR_TOKEN
+#     Value: a Personal Access Token or Project Access Token with the
+#            `write_repository` scope and at least the Developer role on
+#            harrysuke/khairijuri
+#     Flags: Masked + Protected (leave "Expand variable reference" off)
+#
+# IMPORTANT: this job force-updates branches/tags on the target and prunes refs
+# that no longer exist here. The target must be a dedicated mirror: any commits
+# that exist only in harrysuke/khairijuri will be overwritten/deleted.
+# -----------------------------------------------------------------------------
+
+stages:
+  - mirror
+
+variables:
+  # A shallow checkout cannot be mirrored; keep the whole history.
+  GIT_DEPTH: "0"
+  GIT_STRATEGY: fetch
+  MIRROR_TARGET: "gitlab.com/harrysuke/khairijuri.git"
+
+# Pipelines run for pushes to main, or when started manually in the GitLab UI.
+# (This repo's local branch is currently "master"; push/rename it to "main",
+#  or use "Run pipeline" manually if you keep master.)
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - when: never
+
+mirror:to-gitlab:
+  stage: mirror
+  image: alpine:3.20
+  # Serialize mirror jobs so two pipelines cannot push at the same time.
+  resource_group: mirror-to-gitlab
+  interruptible: false
+  before_script:
+    - apk add --no-cache git
+  script:
+    - |
+      set -eu
+      : "${GITLAB_MIRROR_TOKEN:?GITLAB_MIRROR_TOKEN is not set - see the setup notes at the top of .gitlab-ci.yml}"
+
+      # Do not push a repo into itself (avoids a mirror loop when this config
+      # ends up in the target project).
+      if [ "$CI_PROJECT_PATH" = "harrysuke/khairijuri" ]; then
+        echo "Pipeline is running inside the target project; nothing to mirror. Skipping."
+        exit 0
+      fi
+
+      # The runner checks out one branch only. Fetch every ref, then recreate
+      # local branches so ALL branches (not just the current one) get pushed.
+      git fetch --prune --tags origin '+refs/heads/*:refs/remotes/origin/*'
+      for branch in $(git for-each-ref --format='%(refname:strip=3)' refs/remotes/origin/); do
+        [ "$branch" = "HEAD" ] && continue
+        git update-ref "refs/heads/$branch" "refs/remotes/origin/$branch"
+      done
+
+      # Feed the token through a credential helper so it never appears in a
+      # remote URL or in the job command line. GitLab accepts any non-empty
+      # username with a PAT as the password; "oauth2" is the documented one.
+      # The empty value first resets any helper inherited from system config.
+      git config --global credential.helper ''
+      git config --global --add credential.helper \
+        '!f() { echo "username=oauth2"; echo "password=$GITLAB_MIRROR_TOKEN"; }; f'
+
+      # Force-update heads/tags and delete refs removed from the source.
+      git push --prune "https://${MIRROR_TARGET}" \
+        '+refs/heads/*:refs/heads/*' \
+        '+refs/tags/*:refs/tags/*'
+
+      echo "Mirror to https://${MIRROR_TARGET} completed."
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
+      allow_failure: false
