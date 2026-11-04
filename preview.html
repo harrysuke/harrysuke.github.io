@@ -56,29 +56,13 @@
           </svg>
         </button>
       </li>
-      <li class="nav-translate-wrap">
-        <button class="nav-search-btn nav-translate-btn" onclick="toggleTranslateMenu()" aria-label="Translate">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m5 8 6 6"/>
-            <path d="m4 14 6-6 2-3"/>
-            <path d="M2 5h12"/>
-            <path d="M7 2h1"/>
-            <path d="m22 22-5-10-5 10"/>
-            <path d="M14 18h6"/>
-          </svg>
-          <span class="nav-translate-label" id="currentLang">EN</span>
-        </button>
-        <div class="translate-dropdown" id="translateDropdown">
-          <button class="translate-option active" onclick="setLanguage('en')" data-lang="en">
-            <span class="translate-flag">&#127468;&#127463;</span>
-            <span class="translate-name">English</span>
-            <span class="translate-code">EN</span>
+      <li class="nav-lang-wrap">
+        <div class="lang-toggle" role="group" aria-label="Language selection">
+          <button type="button" class="lang-code active" data-lang="en" onclick="setLanguage('en')" aria-pressed="true" title="English">EN</button>
+          <button type="button" class="lang-switch" id="langSwitch" role="switch" aria-checked="false" aria-label="Switch to Malay" onclick="toggleLanguage()">
+            <span class="lang-thumb"></span>
           </button>
-          <button class="translate-option" onclick="setLanguage('ms')" data-lang="ms">
-            <span class="translate-flag">&#127474;&#127481;</span>
-            <span class="translate-name">Bahasa Melayu</span>
-            <span class="translate-code">MS</span>
-          </button>
+          <button type="button" class="lang-code" data-lang="ms" onclick="setLanguage('ms')" aria-pressed="false" title="Bahasa Melayu">MY</button>
         </div>
       </li>
       <li>
@@ -165,7 +149,7 @@
       </div>
       <div class="about-card">
         <h3 data-i18n="about_currently_title">Currently</h3>
-        <p data-i18n="about_currently_desc">Building <a href="https://github.com/harrysuke/Bonafoid">Bonafoid</a>&mdash;an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.</p>
+        <p data-i18n-html="about_currently_desc">Building <a href="https://github.com/harrysuke/Bonafoid">Bonafoid</a>&mdash;an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.</p>
       </div>
       <div class="about-card">
         <h3 data-i18n="about_opentoWork_title">Open to Work</h3>
@@ -920,7 +904,7 @@
       about_focus_title: "Focus Areas",
       about_focus_desc: "Full-stack web development, cross-platform desktop/mobile apps (Tauri, Flutter, Electron), workflow automation & low-code platforms, and RESTful API design with clean architecture.",
       about_currently_title: "Currently",
-      about_currently_desc: "Building Bonafoid—an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.",
+      about_currently_desc: "Building <a href=\"https://github.com/harrysuke/Bonafoid\">Bonafoid</a>&mdash;an open-source workflow platform that translates visual models into web, desktop (Tauri), and mobile (PWA) applications. Also exploring Spring Boot + HTMX and ASP.NET Core MVC patterns.",
       about_opentoWork_title: "Open to Work",
       about_opentoWork_desc: "Actively seeking opportunities. Available for full-stack development roles, freelance projects, and collaboration on open-source. 169 repos, 21 followers on GitHub.",
       skills_label: "Skills Inventory",
@@ -965,7 +949,7 @@
       about_focus_title: "Bidang Fokus",
       about_focus_desc: "Pembangunan web full-stack, aplikasi desktop/mudah alih merentas platform (Tauri, Flutter, Electron), automasi aliran kerja & platform low-code, serta reka bentuk RESTful API dengan seni bina yang bersih.",
       about_currently_title: "Kini",
-      about_currently_desc: "Membina Bonafoid—platform aliran kerja sumber terbuka yang menterjemah model visual kepada aplikasi web, desktop (Tauri), dan mudah alih (PWA). Juga meneroka Spring Boot + HTMX dan corak ASP.NET Core MVC.",
+      about_currently_desc: "Membina <a href=\"https://github.com/harrysuke/Bonafoid\">Bonafoid</a>&mdash;platform aliran kerja sumber terbuka yang menterjemah model visual kepada aplikasi web, desktop (Tauri), dan mudah alih (PWA). Juga meneroka Spring Boot + HTMX dan corak ASP.NET Core MVC.",
       about_opentoWork_title: "Terbuka untuk Kerja",
       about_opentoWork_desc: "Sedang mencari peluang. Boleh dipertimbangkan untuk peranan pembangunan full-time, projek bebas, dan kolaborasi sumber terbuka. 169 repositori, 21 pengikut di GitHub.",
       skills_label: "Inventori Kemahiran",
@@ -1002,6 +986,20 @@
     }
   };
 
+  function updateLangToggle(lang) {
+    var isMalay = lang === 'ms';
+    var toggle = document.getElementById('langSwitch');
+    if (toggle) {
+      toggle.setAttribute('aria-checked', isMalay ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isMalay ? 'Switch to English' : 'Switch to Malay');
+    }
+    document.querySelectorAll('.lang-code').forEach(function(btn) {
+      var active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
   function setLanguage(lang) {
     if (!i18n[lang]) return;
     localStorage.setItem('portfolio-lang', lang);
@@ -1010,33 +1008,31 @@
       var key = el.getAttribute('data-i18n');
       if (i18n[lang][key]) el.textContent = i18n[lang][key];
     });
+    /* Entries with inline markup (e.g. the Bonafoid link) use innerHTML */
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+    });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
       var key = el.getAttribute('data-i18n-placeholder');
       if (i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
     });
-    document.querySelectorAll('.translate-option').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
-    var label = document.getElementById('currentLang');
-    if (label) label.textContent = lang === 'ms' ? 'MS' : 'EN';
-    var dropdown = document.getElementById('translateDropdown');
-    if (dropdown) dropdown.classList.remove('active');
+    updateLangToggle(lang);
   }
 
-  function toggleTranslateMenu() {
-    var dropdown = document.getElementById('translateDropdown');
-    if (dropdown) dropdown.classList.toggle('active');
+  function toggleLanguage() {
+    var toggle = document.getElementById('langSwitch');
+    var isMalay = toggle && toggle.getAttribute('aria-checked') === 'true';
+    setLanguage(isMalay ? 'en' : 'ms');
   }
-
-  document.addEventListener('click', function(e) {
-    var wrap = document.querySelector('.nav-translate-wrap');
-    var dropdown = document.getElementById('translateDropdown');
-    if (wrap && dropdown && !wrap.contains(e.target)) dropdown.classList.remove('active');
-  });
 
   (function() {
     var stored = localStorage.getItem('portfolio-lang');
-    if (stored && stored !== 'en') setLanguage(stored);
+    if (stored && stored !== 'en') {
+      setLanguage(stored);
+    } else {
+      updateLangToggle('en');
+    }
   })();
 </script>
 
