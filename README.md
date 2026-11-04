@@ -1,8 +1,17 @@
 # harrysuke.github.io
 
-Welcome to my personal website and blog repository! This site is built using **Jekyll** and is automatically hosted via **GitHub Pages**. 
+Welcome to my personal website and blog repository! This site is built using **Jekyll** and is hosted via **GitHub Pages**. The repository is also mirrored on [GitLab](https://gitlab.com/harrysuke/khairijuri) for **GitLab Pages** deployment.
 
 The foundation of this theme is based on open-source work by Mark Otto and is released under the MIT License.
+
+## 🌐 Live Sites
+
+| Platform | Site URL | Repository |
+| --- | --- | --- |
+| GitHub Pages | <https://harrysuke.github.io> | <https://github.com/harrysuke/harrysuke.github.io> |
+| GitLab Pages | <https://harrysuke.gitlab.io/khairijuri/> | <https://gitlab.com/harrysuke/khairijuri> |
+
+> The `deploy:pages` job in `.gitlab-ci.yml` builds Jekyll into `_site` and publishes it with `pages.publish`. It derives `url`/`baseurl` from GitLab's `CI_PAGES_URL`, so both the project path (`/khairijuri/`) and a **Use unique domain** URL (`khairijuri-<id>.gitlab.io`) work without touching `_config.yml`. Do not publish the source `public/` folder — it holds CSS/icons, not the built site.
 
 ## 📁 Repository Structure
 
@@ -23,10 +32,11 @@ Make sure you have Ruby and Bundler installed on your system.
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository from either host:
    ```bash
-   git clone https://github.com
-   cd harrysuke.github.io
+   git clone https://github.com/harrysuke/harrysuke.github.io.git
+   # or: git clone https://gitlab.com/harrysuke/khairijuri.git
+   cd harrysuke.github.io   # or cd khairijuri for the GitLab clone
    ```
 
 2. Install the required dependencies:

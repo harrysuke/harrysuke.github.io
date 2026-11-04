@@ -2,13 +2,18 @@
 # Mirror this Jekyll repository (all branches, tags and full history) to
 # https://gitlab.com/harrysuke/khairijuri.git
 #
-# ONE-TIME SETUP on the GitLab project that RUNS this pipeline:
+# ONE-TIME SETUP - only required on a project that ACTUALLY pushes the mirror
+# (i.e. when this file runs on the source side, NOT inside the target project):
 #   Settings > CI/CD > Variables > Add variable
 #     Key:   GITLAB_MIRROR_TOKEN
 #     Value: a Personal Access Token or Project Access Token with the
 #            `write_repository` scope and at least the Developer role on
 #            harrysuke/khairijuri
 #     Flags: Masked + Protected (leave "Expand variable reference" off)
+#
+# When this file runs INSIDE harrysuke/khairijuri (source == target), the job
+# detects that and exits successfully before touching the token, so no CI/CD
+# variable is needed in that case.
 #
 # IMPORTANT: this job force-updates branches/tags on the target and prunes refs
 # that no longer exist here. The target must be a dedicated mirror: any commits
@@ -17,19 +22,21 @@
 
 stages:
   - mirror
+  - deploy
 
 variables:
   # A shallow checkout cannot be mirrored; keep the whole history.
+  # (deploy:pages overrides this with a shallow clone to keep builds fast.)
   GIT_DEPTH: "0"
   GIT_STRATEGY: fetch
+  # Host + path only; the script prefixes "https://" itself.
   MIRROR_TARGET: "gitlab.com/harrysuke/khairijuri.git"
 
-# Pipelines run for pushes to main, or when started manually in the GitLab UI.
-# (This repo's local branch is currently "master"; push/rename it to "main",
-#  or use "Run pipeline" manually if you keep master.)
+# Pipelines run for pushes to the default branch, or when started manually
+# in the GitLab UI.
 workflow:
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: '$CI_PIPELINE_SOURCE == "web"'
     - when: never
 
@@ -44,14 +51,16 @@ mirror:to-gitlab:
   script:
     - |
       set -eu
-      : "${GITLAB_MIRROR_TOKEN:?GITLAB_MIRROR_TOKEN is not set - see the setup notes at the top of .gitlab-ci.yml}"
 
-      # Do not push a repo into itself (avoids a mirror loop when this config
-      # ends up in the target project).
-      if [ "$CI_PROJECT_PATH" = "harrysuke/khairijuri" ]; then
+      # Do not push a repo into itself. This check MUST come before the token
+      # assertion: when this config is deployed in the target project there is
+      # nothing to mirror, and the job has to succeed without any credentials.
+      if [ "${CI_PROJECT_PATH:-}" = "harrysuke/khairijuri" ]; then
         echo "Pipeline is running inside the target project; nothing to mirror. Skipping."
         exit 0
       fi
+
+      : "${GITLAB_MIRROR_TOKEN:?GITLAB_MIRROR_TOKEN is not set - add the masked/protected CI/CD variable described at the top of .gitlab-ci.yml}"
 
       # The runner checks out one branch only. Fetch every ref, then recreate
       # local branches so ALL branches (not just the current one) get pushed.
@@ -76,8 +85,67 @@ mirror:to-gitlab:
 
       echo "Mirror to https://${MIRROR_TARGET} completed."
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: on_success
     - if: '$CI_PIPELINE_SOURCE == "web"'
       when: manual
       allow_failure: false
+
+# -----------------------------------------------------------------------------
+# GitLab Pages
+#
+# Do NOT publish the repository's `public/` folder: it is a Jekyll SOURCE asset
+# directory (css/, favicon.ico, ...) and contains no index.html. Jekyll also
+# cleans its destination on every build, so building into `public/` would delete
+# those assets. Build into `_site` and point `pages.publish` at `_site` instead.
+#
+# baseurl is derived from CI_PAGES_URL so the site works with either setting in
+# Deploy > Pages > "Use unique domain":
+#   ON  -> https://khairijuri-<id>.gitlab.io/        -> baseurl ""
+#   OFF -> https://harrysuke.gitlab.io/khairijuri/  -> baseurl "/khairijuri"
+# The generated _config_gitlab.yml overrides `url` and `baseurl` because
+# atom.xml and the og:url meta tag read site.url. Files starting with "_" are
+# ignored by Jekyll and are never copied into the published site.
+# -----------------------------------------------------------------------------
+deploy:pages:
+  stage: deploy
+  image: ruby:3.3
+  variables:
+    GIT_DEPTH: "20"
+  before_script:
+    # This repo has no Gemfile, so `bundle install` would fail. Matches the
+    # GitHub Actions workflow, which also uses a bare `gem install jekyll`.
+    - gem install jekyll --no-document
+  script:
+    - |
+      set -eu
+
+      pages_url="${CI_PAGES_URL:-https://harrysuke.gitlab.io/khairijuri}"
+      host_path="${pages_url#*://}"
+      host="${host_path%%/*}"
+      path="${host_path#*/}"
+
+      if [ "$path" = "$host_path" ]; then
+        baseurl=""
+      else
+        baseurl="/${path%/}"
+        if [ "$baseurl" = "/" ]; then
+          baseurl=""
+        fi
+      fi
+
+      printf 'url: "https://%s%s"\nbaseurl: "%s"\n' \
+        "$host" "$baseurl" "$baseurl" > _config_gitlab.yml
+
+      echo "Building for https://${host}${baseurl} (baseurl='${baseurl}')"
+      jekyll build --config _config.yml,_config_gitlab.yml -d _site
+
+      # Fail with a clear message instead of an opaque pages:deploy error.
+      test -s _site/index.html
+  pages:
+    publish: _site
+  artifacts:
+    paths:
+      - _site
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
