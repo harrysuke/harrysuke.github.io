@@ -4,6 +4,8 @@ title: "Hacking-Notes"
 layout: post
 date: 2026-10-13 05:02:27 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

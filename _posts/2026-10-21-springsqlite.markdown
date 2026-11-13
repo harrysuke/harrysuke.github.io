@@ -4,6 +4,8 @@ title: "springsqlite"
 layout: post
 date: 2026-10-21 04:46:13 +0000
 categories: kotlin
+noindex: true
+
 ---
 
 ## Overview

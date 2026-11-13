@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# /preview.html is a design artifact. It carries a noindex meta tag instead of a
+# Disallow rule, so crawlers can fetch the page and honour the noindex directive.
+
+Sitemap: https://harrysuke.github.io/sitemap.xml

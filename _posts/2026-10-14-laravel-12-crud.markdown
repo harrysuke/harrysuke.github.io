@@ -4,6 +4,8 @@ title: "laravel-12-crud"
 layout: post
 date: 2026-10-14 00:51:11 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

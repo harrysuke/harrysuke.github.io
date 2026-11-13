@@ -2,9 +2,11 @@
 published: true
 title: Hello World!
 layout: post
+noindex: true
+
 ---
 
-# Welcome to My GitHub Pages Blog!
+## Welcome to My GitHub Pages Blog!
 
 Hello, world! 👋
 

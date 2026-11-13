@@ -4,6 +4,8 @@ title: "DeepMindBreak"
 layout: post
 date: 2026-09-19 03:37:40 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

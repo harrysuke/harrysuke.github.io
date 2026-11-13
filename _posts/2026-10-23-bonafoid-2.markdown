@@ -4,6 +4,8 @@ title: "Bonafoid"
 layout: post
 date: 2026-10-23 07:06:46 +0000
 categories: rust
+noindex: true
+
 ---
 
 ## Overview

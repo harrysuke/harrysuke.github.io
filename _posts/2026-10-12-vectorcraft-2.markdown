@@ -4,6 +4,8 @@ title: "vectorcraft"
 layout: post
 date: 2026-10-12 00:09:48 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

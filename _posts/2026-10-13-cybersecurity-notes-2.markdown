@@ -4,6 +4,8 @@ title: "cybersecurity-notes"
 layout: post
 date: 2026-10-13 04:58:46 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

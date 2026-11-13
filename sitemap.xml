@@ -1,0 +1,23 @@
+---
+layout: nil
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in site.pages -%}
+  {%- unless p.sitemap == false or p.url == '/sitemap.xml' or p.url contains '/404' or p.url contains '/preview' or p.url == '/atom.xml' -%}
+  <url>
+    <loc>{{ p.url | absolute_url }}</loc>
+  </url>
+  {%- endunless -%}
+{%- endfor -%}
+{%- for post in site.posts -%}
+  {%- unless post.noindex == true or post.sitemap == false -%}
+  <url>
+    <loc>{{ post.url | absolute_url }}</loc>
+    <lastmod>{{ post.last_modified_at | default: post.date | date: '%Y-%m-%d' }}</lastmod>
+  </url>
+  {%- endunless -%}
+{%- endfor -%}
+</urlset>

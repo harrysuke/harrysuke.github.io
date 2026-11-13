@@ -4,6 +4,8 @@ title: "jan"
 layout: post
 date: 2026-09-15 01:25:49 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

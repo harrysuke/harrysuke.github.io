@@ -4,6 +4,8 @@ title: "Django-CRUD"
 layout: post
 date: 2026-10-14 01:17:35 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

@@ -4,6 +4,8 @@ title: "springsqliteAxios"
 layout: post
 date: 2026-10-23 02:25:22 +0000
 categories: kotlin
+noindex: true
+
 ---
 
 ## Overview

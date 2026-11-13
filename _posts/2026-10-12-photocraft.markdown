@@ -4,6 +4,8 @@ title: "photocraft"
 layout: post
 date: 2026-10-12 00:09:16 +0000
 categories: general
+noindex: true
+
 ---
 
 ## Overview

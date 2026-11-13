@@ -1,12 +1,13 @@
 ---
 published: true
-title: "ASP.NET-Core-MVC-SQLite"
+title: "ASP.NET Core MVC + SQLite with Docker CI/CD: An Architecture Study"
 layout: post
 date: 2026-10-26 01:20:06 +0000
 categories: csharp
+description: "A design-science study of ASP.NET Core MVC with SQLite, EF Core, Docker and GitHub Actions CI/CD: architecture patterns, security, persistence and trade-offs."
 ---
 
-# Architecting Modern Web Applications with ASP.NET Core MVC, SQLite, and Docker CI/CD: A Design-Science Study on Lightweight Full-Stack Development
+**Architecting Modern Web Applications with ASP.NET Core MVC, SQLite, and Docker CI/CD: A Design-Science Study on Lightweight Full-Stack Development**
 
 ## Author
 

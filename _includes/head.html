@@ -3,22 +3,139 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>
-    {% if page.title %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% else %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% endif %}
-  </title>
+  {%- comment -%}
+    Centralised SEO head. Every page gets a unique title, description, canonical,
+    social card and structured data. Per-page overrides live in front matter:
+      description, image, noindex, title
+  {%- endcomment -%}
 
-  <meta name="description" content="{{ site.description }}">
-  <meta name="author" content="{{ site.title }}">
+  {%- assign is_home = false -%}
+  {%- if page.url == '/' or page.url == '/index.html' -%}{%- assign is_home = true -%}{%- endif -%}
+  {%- assign is_post = false -%}
+  {%- if page.layout == 'post' -%}{%- assign is_post = true -%}{%- endif -%}
+
+  {%- assign seo_title = site.title | append: ' — ' | append: site.tagline -%}
+  {%- if is_home -%}
+    {%- assign seo_title = 'Kairi Juri — Full-Stack Developer and Software Systems Researcher' -%}
+  {%- elsif page.title and page.title != site.title -%}
+    {%- assign seo_title = page.title | append: ' · ' | append: site.title -%}
+  {%- endif -%}
+
+  {%- assign seo_desc_raw = site.description -%}
+  {%- if page.description and page.description != '' -%}
+    {%- assign seo_desc_raw = page.description -%}
+  {%- elsif is_post -%}
+    {%- comment -%} Short excerpts are just a repo link; fall back to the article body for a usable, unique snippet. {%- endcomment -%}
+    {%- assign excerpt_text = page.excerpt | strip_html | normalize_whitespace -%}
+    {%- if excerpt_text.size >= 40 -%}
+      {%- assign seo_desc_raw = excerpt_text -%}
+    {%- else -%}
+      {%- assign seo_desc_raw = page.content | strip_html | normalize_whitespace -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign seo_desc_raw = seo_desc_raw | strip_html | normalize_whitespace | truncate: 158 -%}
+  {%- assign seo_desc = seo_desc_raw | escape -%}
+
+  {%- assign page_url = page.url | absolute_url -%}
+  {%- assign page_image = page.image | default: '/public/og-image.png' | absolute_url -%}
+  {%- assign post_modified = page.last_modified_at | default: page.date -%}
+
+  <title>{{ seo_title | escape }}</title>
+  <meta name="description" content="{{ seo_desc }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <link rel="canonical" href="{{ page_url }}">
+  {%- if page.noindex == true or page.url == '/404.html' %}
+  <meta name="robots" content="noindex, follow">
+  {%- else %}
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  {%- endif %}
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ site.title }}">
-  <meta property="og:description" content="{{ site.description }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="{% if is_post %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ seo_title | escape }}">
+  <meta property="og:description" content="{{ seo_desc }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ page_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Kairi Juri — Full-Stack Developer and Software Systems Researcher">
+  {%- if is_post %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:modified_time" content="{{ post_modified | date_to_xmlschema }}">
+  {%- for cat in page.categories %}
+  <meta property="article:section" content="{{ cat | escape }}">
+  {%- endfor %}
+  {%- endif %}
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title | escape }}">
+  <meta name="twitter:description" content="{{ seo_desc }}">
+  <meta name="twitter:image" content="{{ page_image }}">
+  <meta name="twitter:image:alt" content="Kairi Juri — Full-Stack Developer and Software Systems Researcher">
+
+  <!-- Structured data: WebSite + Person everywhere, article + breadcrumbs on posts -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ site.url }}/#website",
+        "url": "{{ site.url }}/",
+        "name": {{ site.title | jsonify }},
+        "description": {{ site.description | jsonify }},
+        "publisher": { "@id": "{{ site.url }}/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "{{ site.url }}/#person",
+        "name": {{ site.author.name | jsonify }},
+        "url": "{{ site.url }}/",
+        "jobTitle": "Full-Stack Developer and Software Systems Researcher",
+        "email": "mailto:{{ site.author.email }}",
+        "sameAs": [
+          "https://github.com/harrysuke",
+          "https://orcid.org/0009-0009-7172-0914",
+          "https://www.researchgate.net/profile/Kairi-Juri"
+        ],
+        "knowsAbout": [
+          "Full-stack web development", "Rust", "Spring Boot", "ASP.NET Core MVC",
+          "Software architecture", "LLM agents", "Retrieval-Augmented Generation",
+          "Cross-platform application development", "SQLite"
+        ]
+      }{% if is_post %},
+      {
+        "@type": "BlogPosting",
+        "@id": "{{ page_url }}#article",
+        "headline": {{ page.title | jsonify }},
+        "description": {{ seo_desc_raw | jsonify }},
+        "url": "{{ page_url }}",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page_url }}" },
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "dateModified": "{{ post_modified | date_to_xmlschema }}",
+        "author": { "@id": "{{ site.url }}/#person" },
+        "publisher": { "@id": "{{ site.url }}/#person" },
+        "image": "{{ page_image }}",
+        "articleSection": {{ page.categories | jsonify }},
+        "inLanguage": "en",
+        "isPartOf": { "@id": "{{ site.url }}/#website" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "{{ page_url }}#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "{{ site.url }}/blog/" },
+          { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }} }
+        ]
+      }{% endif %}
+    ]
+  }
+  </script>
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ '/public/css/portfolio.css' | relative_url }}">
